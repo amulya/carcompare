@@ -1,13 +1,18 @@
 from flask import Flask
 import geocode # do i even need this?
 
+# just import client from routes, right?
+"""
 # user auth
 from user_rides.auth import AuthorizationCodeGrant
 
 from user_rides.session import Session
 from user_rides.client import UberRidesClient
 
-import yaml
+session = Session(server_token=servertoken)
+client = UberRidesClient(session)
+"""
+
 
 """
 # in routes.py: make form for these
@@ -24,7 +29,8 @@ def getCoords(address):
 
 
 # Returns list of available products @ current loc 
-def getProducts(address): 
+def getProducts(address, client):
+	client = client 
 	loc = getCoords(address)
 	start_lat = loc[0]
 	start_lng = loc[1]
@@ -33,18 +39,19 @@ def getProducts(address):
 	return products
 
 # Get price estimates
-def getPrices(address1, address2):
+def getPrices(address1, address2, client):
+	client=client
 	#variables
                 # start_lat
                 # start_lng
                 # end_lat
                 # end_lng
                 # seat_count - for uberPOOL (optional)
-	
+	seat_count=None
 	# address 1 coords
 	loc1 = getCoords(address1)
 	start_lat = loc1[0]
-	start_lng = loc11]
+	start_lng = loc1[1]
 
 	# address 2 coords
 	loc2 = getCoords(address2)
@@ -66,7 +73,8 @@ def getPrices(address1, address2):
 	return price_estimate
 
 # Get time estimates
-def getTimes(address1, address2):
+def getTimes(address1, address2, client):
+	client=client
 	#variables
                 # start/end latitude
                 # start/end longitude
@@ -78,10 +86,11 @@ def getTimes(address1, address2):
 	start_lng = loc1[1]
 
 	# address 2 coords
-        loc2 = getCoords(address2)
-        end_lat = loc2[0]
-        end_lng = loc2[1]
-
+	loc2 = getCoords(address2)
+	end_lat = loc2[0]
+	end_lng = loc2[1]
+	
+	product_id=None
 	# get product_id thru form response?
 		# product_id = FORMRESPONSEEEEE
 		# use a method to get actual id?

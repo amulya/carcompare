@@ -9,7 +9,7 @@ gmaps_api = yaml.load(open('gmaps_api.yaml'))
 params = {}
 
 def getLoc(address):
-	params["address"] = '100 Mountain Ave, New Providence, NJ 07974'
+	params["address"] = address
 	params["key"] = gmaps_api['key']
 
 	# Do the request and get the response data

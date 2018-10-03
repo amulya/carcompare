@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title>Home | Car Compare</title>
+</head>
+<body>
+	<form method="POST">
+		Current location: <br>
+		<input type = "text" name= "start" value = "">
+		Destination: <br>
+		<input type = "text" name="end" value = "">
+		<input type = "submit" value = "Compare">
+	</form>
+	{% if price_estimate %}
+		{% for i in range(0, price_estimate|length - 1) %}
+			{{ price_estimate[i] }}<br><br>
+		{% endfor %}
+	{% endif %}
+</body>
+</html>
